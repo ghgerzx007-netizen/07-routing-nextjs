@@ -2,10 +2,13 @@ import TanStackProvider from "../components/TanStackProvider/TanStackProvider";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 
+
 export default function RootLayout({
   children,
+  modal,
 }: {
-  children: React.ReactNode;
+    children: React.ReactNode;
+  modal: React.ReactNode;
 }) {
   return (
     <html lang="en">
@@ -13,6 +16,7 @@ export default function RootLayout({
         <TanStackProvider>
           <Header />
           {children}
+          {modal}
           <div id="modal-root"></div>
           <Footer />
         </TanStackProvider>

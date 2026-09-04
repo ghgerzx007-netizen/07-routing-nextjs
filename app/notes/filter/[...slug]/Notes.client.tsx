@@ -13,9 +13,11 @@ import NoteList from "@/components/NoteList/NoteList";
 import Modal from "@/components/Modal/Modal";
 import NoteForm from "@/components/NoteForm/NoteForm";
 
+interface NotesClientProps{
+  tag?: string
+}
 
-
-export default function NotesClient() {
+export default function NotesClient({ tag }:NotesClientProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [page, setPage] = useState(1);
   const [searchValue, setSearchValue] = useState("");
@@ -24,14 +26,14 @@ export default function NotesClient() {
     setSearchValue(value);
     setPage(1);
   }
-  
+  const normalizedTag = tag && tag !== "all" ? tag : undefined;
   const {
     data: fetchNotesResponse,
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ["notes", page, debouncedSearchValue],
-    queryFn: () => fetchNotes(page, debouncedSearchValue),
+    queryKey: ["notes", page, debouncedSearchValue,normalizedTag],
+    queryFn: () => fetchNotes(page, debouncedSearchValue,normalizedTag),
     placeholderData: keepPreviousData,
     refetchOnMount: false,
     
