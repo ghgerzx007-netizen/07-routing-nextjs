@@ -8,7 +8,7 @@ import NotesClient from "./Notes.client";
 
 interface NotesPageProps {
   searchParams: Promise<{ page?: string; search?: string }>;
-  params: { slug?: string[] }
+  params: Promise<{ slug: string[] }>
 }
 
 export default async function NotesPage({ searchParams, params }: NotesPageProps) {
