@@ -20,6 +20,7 @@ function Modal({
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [onClose]);
+
   useEffect(() => {
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -27,12 +28,13 @@ function Modal({
       document.body.style.overflow = originalOverflow;
     };
   }, []);
+
   if (!children) {
     return null;
   }
 
-  const portalRoot = document.getElementById("modal-root");
-  if (!portalRoot) return null;
+  const portalRoot = document.getElementById("modal-root") ?? document.body;
+
   return createPortal(
     <div
       onClick={onClose}
@@ -47,4 +49,5 @@ function Modal({
     portalRoot,
   );
 }
+
 export default Modal;
